@@ -1,5 +1,4 @@
 // Simulated API functions
-
 function fetchUserProfile(userId) {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -30,7 +29,6 @@ function fetchUserPosts(userId) {
 function fetchPostComments(postId) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      // 30% chance of failure
       if (Math.random() < 0.3) {
         reject(new Error('Failed to fetch comments'));
         return;
@@ -131,11 +129,13 @@ async function fetchDataInParallel(userId) {
   }
 }
 
-// Button event listeners
-document.getElementById('sequentialBtn').addEventListener('click', () => {
-  fetchDataSequentially(1);
-});
+// Add button event listeners once DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('sequentialBtn').addEventListener('click', () => {
+    fetchDataSequentially(1);
+  });
 
-document.getElementById('parallelBtn').addEventListener('click', () => {
-  fetchDataInParallel(1);
+  document.getElementById('parallelBtn').addEventListener('click', () => {
+    fetchDataInParallel(1);
+  });
 });
